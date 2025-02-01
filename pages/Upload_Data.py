@@ -41,7 +41,7 @@ if data_soal is not None:
             col1, col2, col3 = st.columns([1, 1, 2])
             with col1:
                 st.download_button(
-                    label="📥 Download Excel",
+                    label="📥 Download CSV",
                     data=csv,
                     file_name='hasil_klasifikasi.csv',
                     mime="text/csv",

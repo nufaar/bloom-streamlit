@@ -3,11 +3,7 @@ import pandas as pd
 import numpy as np
 import io
 from transformers import BertForSequenceClassification, BertTokenizer, pipeline
-
-model = BertForSequenceClassification.from_pretrained('nufa/model')
-tokenizer = BertTokenizer.from_pretrained('nufa/model')
-
-predict = pipeline("text-classification", model=model, tokenizer=tokenizer)
+from utils import load_model
 
 @st.cache_data
 def convert_df(df):
@@ -22,7 +18,9 @@ def convert_df_to_excel(df):
     processed_data = output.getvalue()
     return processed_data
 
-st.title('🤖 Klasifikasi Soal Otomatis')
+model = load_model()
+
+st.title('Klasifikasi Soal Otomatis')
 data_soal = st.file_uploader('Masukan data soal')
 
 if data_soal is not None:
@@ -32,7 +30,7 @@ if data_soal is not None:
     if st.button('🔍 Mulai Klasifikasi!'):
         if list_soal is not None:
             indikator = st.text('🔃 mengklasifikasi soal...')
-            result = predict(list_soal)
+            result = model(list_soal)
             indikator.text('✅ klasifikasi selesai')
             
             csv = convert_df(pd.concat([df, pd.DataFrame(result)], axis=1))

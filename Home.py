@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from transformers import BertForSequenceClassification, BertTokenizer, pipeline
 from utils import load_model
 
 st.title('Klasifikasi Soal Otomatis')

@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import io
-from transformers import BertForSequenceClassification, BertTokenizer, pipeline
 from utils import load_model
 
 @st.cache_data
